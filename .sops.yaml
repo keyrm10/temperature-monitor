@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: terraform/secrets/azure\.ya?ml$
+    age: age14s606zmefhvqjhm0szqss07qnugjdgy85mua500q5lqqhzcqrsnq7d328u
+    encrypted_regex: ^(AZURE_.*)$

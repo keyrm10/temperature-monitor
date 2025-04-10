@@ -24,6 +24,13 @@ go.work.sum
 # env file
 .env
 
+# Age keys
+*.key
+
+# SOPS secrets
+**/secrets/*
+!**/secrets/*.enc.*
+
 # Local .terraform directories
 **/.terraform/*
 
