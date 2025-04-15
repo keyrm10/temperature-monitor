@@ -13,7 +13,36 @@
 - Secure handling of Azure credentials with SOPS and Age encryption.
 - Ready-to-use Grafana dashboard for temperature visualization.
 
-### Project structure
+### Directory structure
+
+```
+./temperature-monitor
+├── .gitignore
+├── LICENSE
+├── README.md
+├── compose.yaml
+├── grafana/
+│   ├── provisioning/
+│   │   ├── dashboards/
+│   │   │   ├── dashboard.yaml
+│   │   │   ├── temperature.json
+│   │   ├── datasources/
+│   │   │   ├── datasource.yaml
+├── prometheus/
+│   ├── prometheus.yaml
+├── temperature-exporter/
+│   ├── Dockerfile
+│   ├── go.mod
+│   ├── main.go
+├── terraform/
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── secrets/
+│   │   ├── azure.enc.yaml
+│   ├── user_data.sh
+│   ├── variables.tf
+└── .sops.yaml
+```
 
 - [`compose.yaml`](compose.yaml): Docker Compose stack definition.
 - [`temperature-exporter/`](temperature-exporter/): Go exporter source and Dockerfile.
@@ -48,6 +77,9 @@
 - [SOPS](https://github.com/mozilla/sops) (for secrets decryption)
 - [Age](https://github.com/FiloSottile/age) (for SOPS key management)
 - Azure subscription and credentials (see Configuration)
+- SSH key pair for VM authentication (see [Azure documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/linux-vm-connect))
+
+  - The default SSH public key path is set in the Terraform variables to `~/.ssh/id_rsa.pub`. Ensure this key exists, or update the variable to point to your desired key. Azure VM support both RSA and ED25519. While password authentication is also available, it is less secure and not recommended.
 
 ---
 
@@ -150,7 +182,7 @@
   - The "Temperature Dashboard" is pre-provisioned and displays the current temperature for Tallinn.
 
 - **Customizing location:**
-  To monitor a different location, modify the `coordinates` variable in [`temperature-exporter/main.go`](temperature-exporter/main.go) and rebuild the Docker image.
+  To monitor a different location, modify the `coordinates` variable in [`temperature-exporter/main.go`](temperature-exporter/main.go), rebuild the Docker image, and restart the exporter container.
 
 ---
 
