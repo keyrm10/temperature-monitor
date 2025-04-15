@@ -1,0 +1,43 @@
+{
+  "title": "Temperature Dashboard",
+  "editable": true,
+  "refresh": "5m",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Tallinn Temperature",
+      "type": "gauge",
+      "datasource": {
+        "type": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "max": 40,
+          "min": -20,
+          "unit": "celsius"
+        }
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": ["lastNotNull"]
+        }
+      },
+      "targets": [
+        {
+          "expr": "current_temperature_celsius",
+          "interval": "5m",
+          "refId": "A"
+        }
+      ]
+    }
+  ]
+}
