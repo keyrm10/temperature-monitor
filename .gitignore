@@ -68,3 +68,7 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Cross-platform system files
+.DS_Store
+Thumbs.db
