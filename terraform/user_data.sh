@@ -19,4 +19,4 @@ apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker
 # Clone the repository and start services
 git clone https://github.com/keyrm10/temperature-monitor.git /app
 cd /app
-docker compose up -d
+docker compose up --build -yd
